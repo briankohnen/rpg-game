@@ -4,7 +4,7 @@ $(document).ready(function () {
 var characterOne = {
     name : "Harry Potter",
     hp : 100,
-    atkPower : 9,
+    atkPower : 7,
     counterAtkPower : 7,
     id : "charOne"
 };
@@ -12,7 +12,7 @@ var characterOne = {
 var characterTwo = {
     name : "Severus Snape",
     hp : 120,
-    atkPower : 7,
+    atkPower : 4,
     counterAtkPower : 8,
     id : "charTwo"
 };
@@ -20,15 +20,15 @@ var characterTwo = {
 var characterThree = {
     name : "Voldemort",
     hp : 105,
-    atkPower : 8,
-    counterAtkPower : 10,
+    atkPower : 5,
+    counterAtkPower : 9,
     id : "charThree"
 };
 
 var characterFour = {
     name : "Albus Dumbledore",
     hp : 110,
-    atkPower : 9,
+    atkPower : 6,
     counterAtkPower : 6,
     id : "charFour"
 };
@@ -42,7 +42,12 @@ var myCharacter;
 var enemyFighter;
 var isFighting = false;
 var enemiesDefeated = 0;
+var baseAtkPower;
 $("#resetButton").css("opacity", 0);
+$("#charOneHp").text(characterOne.hp);
+$("#charTwoHp").text(characterTwo.hp);
+$("#charThreeHp").text(characterThree.hp);
+$("#charFourHp").text(characterFour.hp);
 
 // game function
 function gameStart() {
@@ -62,14 +67,18 @@ function gameStart() {
             var myCharacterId = $(myCharacter).attr("id");
             if (myCharacterId === "charOne") {
                 myCharacterObject = characterOne;
+                $("#charOneHp").text(myCharacterObject.hp);
             } else if (myCharacterId === "charTwo") {
                 myCharacterObject = characterTwo;
+                $("#charTwoHp").text(myCharacterObject.hp);
             } else if (myCharacterId === "charThree") {
                 myCharacterObject = characterThree;
+                $("#charThreeHp").text(myCharacterObject.hp);
             } else if (myCharacterId === "charFour") {
                 myCharacterObject = characterFour
+                $("#charFourHp").text(myCharacterObject.hp);
             }
-            console.log(myCharacter);
+            console.log(myCharacterObject);
 
             // after character is chosen, user can click enemy images to fight them
             if (characterChosen === true) {
@@ -90,8 +99,9 @@ function gameStart() {
                         } else if (enemyId === "charThree") {
                             enemyFighter = characterThree;
                         } else if (enemyId === "charFour") {
-                            enemyFighter = characterFour
+                            enemyFighter = characterFour;
                         }
+                        baseAtkPower = myCharacterObject.atkPower;
                         console.log(enemyFighter);
                     }
                 })
@@ -113,10 +123,28 @@ function gameStart() {
                     myCharacterObject.hp = myCharacterObject.hp - counterInfo;
                     $("#attackInfo").text("You hit " + enemyFighter.name + " for " + hitInfo + " points");
                     $("#attackInfo").append("<br>" + enemyFighter.name + " hit you for " + counterInfo + " points");
-                    myCharacterObject.atkPower += 5;
+                    myCharacterObject.atkPower += baseAtkPower;
                     console.log("enemy hp : " + enemyFighter.hp);
+                    if (enemyFighter.id === "charOne") {
+                        $("#charOneHp").text(enemyFighter.hp);
+                    } else if (enemyFighter.id === "charTwo") {
+                        $("#charTwoHp").text(enemyFighter.hp);
+                    } else if (enemyFighter.id === "charThree") {
+                        $("#charThreeHp").text(enemyFighter.hp);
+                    } else if (enemyFighter.id === "charFour") {
+                        $("#charFourHp").text(enemyFighter.hp);
+                    }
                     console.log("my atkPower : " + myCharacterObject.atkPower);
                     console.log("my hp : " + myCharacterObject.hp);
+                    if (myCharacterObject.id === "charOne") {
+                        $("#charOneHp").text(myCharacterObject.hp);
+                    } else if (myCharacterObject.id === "charTwo") {
+                        $("#charTwoHp").text(myCharacterObject.hp);
+                    } else if (myCharacterObject.id === "charThree") {
+                        $("#charThreeHp").text(myCharacterObject.hp);
+                    } else if (myCharacterObject.id === "charFour") {
+                        $("#charFourHp").text(myCharacterObject.hp);
+                    }
                 // if enemy's hp <= 0 display a win, and hide the defeated enemy, reset isFighting / enemyChosen to false    
                 } else {
                     console.log("you won the battle");

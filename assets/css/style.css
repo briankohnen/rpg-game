@@ -3,6 +3,13 @@ body {
     font-family: Bahianita, 'Courier New', Courier, monospace;
 }
 
+h1 {
+    color: white;
+    float: right;
+    font-size: 64px;
+    letter-spacing: 5px;
+}
+
 #characters {
     display: grid;
     grid-template-columns: 100px 100px 100px 100px;
@@ -68,4 +75,12 @@ body {
 p {
     color: white;
     font-size: 20px;
+}
+
+.charHp {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 40px;
 }
