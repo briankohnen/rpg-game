@@ -1,14 +1,16 @@
+$(document).ready(function () {
+
 // declare character objects
 var characterOne = {
-    name : "asknasdc",
+    name : "Harry Potter",
     hp : 100,
-    atkPower : 5,
+    atkPower : 9,
     counterAtkPower : 7,
     id : "charOne"
 };
 
 var characterTwo = {
-    name : "buttmong",
+    name : "Severus Snape",
     hp : 120,
     atkPower : 7,
     counterAtkPower : 8,
@@ -16,18 +18,18 @@ var characterTwo = {
 };
 
 var characterThree = {
-    name : "shoosua",
+    name : "Voldemort",
     hp : 105,
-    atkPower : 6,
+    atkPower : 8,
     counterAtkPower : 10,
     id : "charThree"
 };
 
 var characterFour = {
-    name : "aroei",
+    name : "Albus Dumbledore",
     hp : 110,
-    atkPower : 8,
-    counterAtkPower : 7,
+    atkPower : 9,
+    counterAtkPower : 6,
     id : "charFour"
 };
 
@@ -35,10 +37,12 @@ var characterFour = {
 var otherChars = $("#characters");
 var characterChosen = false;
 var enemyChosen = false;
+var myCharacterObject;
 var myCharacter;
 var enemyFighter;
 var isFighting = false;
 var enemiesDefeated = 0;
+$("#resetButton").css("opacity", 0);
 
 // game function
 function gameStart() {
@@ -57,13 +61,13 @@ function gameStart() {
             // use .attr to extract id data of selected character image, and assign character 1, 2, 3, or 4
             var myCharacterId = $(myCharacter).attr("id");
             if (myCharacterId === "charOne") {
-                myCharacter = characterOne;
+                myCharacterObject = characterOne;
             } else if (myCharacterId === "charTwo") {
-                myCharacter = characterTwo;
+                myCharacterObject = characterTwo;
             } else if (myCharacterId === "charThree") {
-                myCharacter = characterThree;
+                myCharacterObject = characterThree;
             } else if (myCharacterId === "charFour") {
-                myCharacter = characterFour
+                myCharacterObject = characterFour
             }
             console.log(myCharacter);
 
@@ -99,25 +103,26 @@ function gameStart() {
     $("#attackButton").on("click", function () {
         if (enemyChosen === true) {
         if (isFighting === true) {
-            if (myCharacter.hp > 0) {
+            if (myCharacterObject.hp > 0) {
                 // if enemy's hp is above 0, hit enemy and recieve a hit from the enemy. add 5 to myCharacter.atkPower each hit
                 // display the hit information on the page at lines 109-110
                 if (enemyFighter.hp > 0) {
-                    var hitInfo = Math.round(myCharacter.atkPower + (Math.random() * myCharacter.atkPower));
+                    var hitInfo = Math.round(myCharacterObject.atkPower + (Math.random() * myCharacterObject.atkPower));
                     var counterInfo = Math.round(enemyFighter.counterAtkPower + (Math.random() * enemyFighter.counterAtkPower));
                     enemyFighter.hp = enemyFighter.hp - hitInfo;
-                    myCharacter.hp = myCharacter.hp - counterInfo;
+                    myCharacterObject.hp = myCharacterObject.hp - counterInfo;
                     $("#attackInfo").text("You hit " + enemyFighter.name + " for " + hitInfo + " points");
                     $("#attackInfo").append("<br>" + enemyFighter.name + " hit you for " + counterInfo + " points");
-                    myCharacter.atkPower += 5;
+                    myCharacterObject.atkPower += 5;
                     console.log("enemy hp : " + enemyFighter.hp);
-                    console.log("my atkPower : " + myCharacter.atkPower);
-                    console.log("my hp : " + myCharacter.hp);
+                    console.log("my atkPower : " + myCharacterObject.atkPower);
+                    console.log("my hp : " + myCharacterObject.hp);
                 // if enemy's hp <= 0 display a win, and hide the defeated enemy, reset isFighting / enemyChosen to false    
                 } else {
                     console.log("you won the battle");
                     isFighting = false;
                     enemyChosen = false;
+                    enemiesDefeated++;
                     $("#" + enemyFighter.id).css("display", "none");
                     $("#attackInfo").text("You won the battle, choose another enemy");
                 }
@@ -126,18 +131,26 @@ function gameStart() {
                 console.log("you died, restart");
                 isFighting = false;
                 $("#attackInfo").text("You died. Restart?");
+                $("#resetButton").css("opacity", 100);
                 }
             }
-            // if no enemy is chosen display Nothing to fight
+            // if no enemy is chosen display Nothing to fight, if all enemies defeated game over
         } else {
                 $("#attackInfo").text("Nothing to fight here");
+        } if (enemiesDefeated === 3) {
+            $("#attackInfo").text("You defeated all the enemies! Play again?");
+            $("#resetButton").css("opacity", 100);
         }
     });
 };
 
-
 gameStart();
 
+// reload page on click of reset button
+$("#resetButton").on("click", function () {
+    location.reload();
+});
+});
 
 
 
@@ -153,14 +166,27 @@ gameStart();
 
 
 
-    function gameReset () {
-        // $(myCharacter).addClass("charOption");
-        // myCharacter = undefined;
-        // characterChosen = 0;
-        // enemyChosen = 0;
-        // $("body").append(otherChars);
-        gameStart();
 
-    }
-
-    $("#resetButton").on("click", gameReset);
+    // function gameReset () {
+    //     $("#attackInfo").text("");
+    //     $(myCharacter).addClass("charOption");
+    //     myCharacter = 0;
+    //     myCharacterObject = 0;
+    //     var resetChars = $(".charOption");
+    //     otherChars = $("#characters");
+    //     $("#characters").append(resetChars);
+    //     $("#top").append(otherChars);
+    //     characterChosen = 0;
+    //     enemyChosen = 0;
+    //     characterChosen = false;
+    //     enemyChosen = false;
+    //     myCharacter = undefined;
+    //     enemyFighter = undefined;
+    //     isFighting = false;
+    //     enemiesDefeated = 0;
+    //     $("#charOne").css("display", "block");
+    //     $("#charTwo").css("display", "block");
+    //     $("#charThree").css("display", "block");
+    //     $("#charFour").css("display", "block");
+    //     gameStart();
+    // }

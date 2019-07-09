@@ -6,27 +6,30 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assets/css/style.css'>
+    <link href="https://fonts.googleapis.com/css?family=Bahianita&display=swap" rel="stylesheet">
+
 </head>
 <body>
+    <div class="gridWrapper">
+        <div id="characters">
+            <div id="charOne" class="charOption">Harry Potter</div>
+            <div id="charTwo" class="charOption">Severus Snape</div>
+            <div id="charThree" class="charOption">Voldemort</div>
+            <div id="charFour" class="charOption">Albus Dumbledore</div>
+        </div>
 
-<div id="characters">
-    <div id="charOne" class="charOption">1</div>
-    <div id="charTwo" class="charOption">2</div>
-    <div id="charThree" class="charOption">3</div>
-    <div id="charFour" class="charOption">4</div>
-</div>
+        <div id="myCharacter">Your Character</div>
 
-    <h1 id="myCharacter">Your Character</h1>
+        <div id="enemies">Enemies</div>
 
-    <h1 id="enemies">Enemies</h1>
+        <button id="attackButton">Attack</button>
 
-    <button id="attackButton">Attack</button>
+        <div id="defenderSection">Battle</div>
 
-    <h1 id="defenderSection">Battle</h1>
+        <p id="attackInfo"></p>
 
-    <p id="attackInfo"></p>
-
-    <button id="resetButton">Reset</button>
+        <button id="resetButton">Reset</button>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src='assets/javascript/game.js'></script>

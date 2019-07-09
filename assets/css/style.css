@@ -1,29 +1,71 @@
+body {
+    background-image: url(../images/hogwarts.png);
+    font-family: Bahianita, 'Courier New', Courier, monospace;
+}
+
 #characters {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 100px 100px 100px 100px;
     grid-template-rows: auto;
+    grid-gap: 10px;
 }
 
 #charOne {
-    background: red;
+    background-image: url(../images/potter.png);
+    color: white;
+    font-size: 20px;
     width: 100px;
-    height: 100px;
+    height: 150px;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
 }
 
 #charTwo {
-    background: green;
+    background-image: url(../images/snape.png);
+    color: white;
+    font-size: 20px;
     width: 100px;
-    height: 100px;
+    height: 150px;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
 }
 
 #charThree {
-    background: blue;
+    background-image: url(../images/voldemort.png);
+    color: white;
+    font-size: 20px;
     width: 100px;
-    height: 100px;
+    height: 150px;
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
 }
 
 #charFour {
-    background: yellow;
+    background-image: url(../images/dumbledore.png);
+    color: white;
+    font-size: 20px;
     width: 100px;
-    height: 100px;
+    height: 150px;
+    grid-column: 4 / 5;
+    grid-row: 1 / 2;
+}
+
+#myCharacter {
+    color: white;
+    font-size: 42px;
+}
+
+#enemies {
+    font-size: 42px;
+    color: white;
+}
+
+#defenderSection {
+    font-size: 42px;
+    color: white;
+}
+
+p {
+    color: white;
+    font-size: 20px;
 }
